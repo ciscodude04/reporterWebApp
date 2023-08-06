@@ -1,0 +1,26 @@
+html, body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.headers {
+    background-color: #5ca0f2;
+    text-align: center;
+}
+
+#container {
+    background-color: #5ab085;
+}
+
+.graph {
+    width: auto;
+    height: 20rem;
+    position: relative;
+}
+
+.graph p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
