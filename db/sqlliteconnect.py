@@ -1,9 +1,9 @@
 import sqlite3 as sqlite
 from sqlite3 import Error
 
-class SQLConnect:
+class SQLiteConnect:
 
-    stagedb = 'DB/stagedb.db'
+    stagedb = 'testing.db'
 
     def __init__(self):
         pass
@@ -21,14 +21,14 @@ class SQLConnect:
 
     def sqlite_cursor(self, con):
         cur = con.cursor()
-        print ("DB created and connected to SQLite")
+        print ("Connected and ready to run query")
         return cur
     
-    def sqlite_executemany(self, con, q, list):
+    def sqlite_executemany(self, con, query, list):
         '''Execute a lot of sql statements'''
         cur = con.cursor()
-        cur.executemany(q,list)
-        print('Executing sql statement ' + q)
+        cur.executemany(query,list)
+        print('Executing sql statement ' + query)
         con.commit()
         print('Execution commited.')
     
@@ -60,8 +60,11 @@ def create_new_team_table(table_name):
     scenario TEXT,
     step TEXT,
     count TEXT,
+    min TEXT,
     average TEXT,
+    max TEXT,
     percentile_95 TEXT,
+    std_deviation,
     status TEXT,
     term_reason TEXT,
     duration TEXT,
@@ -86,19 +89,22 @@ def create_premier_accounts_table():
     created at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);'''
 
 def drop_table(table_name):
-    q = f'''DROP TABLE {table_name};'''
+    q = '''DROP TABLE {table_name};'''
     return q
 
 def insert_data_to_team_table(table):
-    q = f'''
-    INSERT INTO {table}
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,CURRENT TIMESTAMP)'''
+    q = '''INSERT INTO '''+ table + ''' VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
     return q
 
 
 #Example on how to add a new table. DO NOT RUN EVERYTIME
-#mycon = SQLConnect()
+#mycon = SQLiteConnect()
 #thecon = mycon.sqlite_open_connection(mycon.stagedb)
 #mytable = create_new_team_table('testing')
 #mycon.sqlite_sql_execute(thecon, mytable)
-#mycon.sqlite_connection_close()
+#mycon.sqlite_connection_close(thecon)
+
+#mydb = SQLiteConnect()
+#thecon = mydb.sqlite_open_connection('stagedb.db')
+
+#thecon.sqlite_connection_close(thecon)

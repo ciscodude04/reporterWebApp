@@ -1,11 +1,14 @@
 from flask import Flask, render_template
 from os import environ
 from db import queries as que
+from neoloadreporter import xmlreporter as x
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
+    #que.basequery('testing')
+    x.neoload_xml_reader('testing','C:\\Users\\Cisco\\Documents\\Python Projects\\webappdashboard\\reporterWebApp\\reportsample.xml')
     return "<p> Hello, World</p>"
 
 @app.route('/teamportal/<team>', methods =['GET', 'POST'])
@@ -18,6 +21,10 @@ def teampage(team):
 def sample1():
     return render_template('mainreport1.html')
 
+@app.route('/upload', methods=['GET','POST'])
+def uploadfile():
+    x.neoload_xml_reader('testing','C:\\Users\\Cisco\\Documents\\Python Projects\\webappdashboard\\reporterWebApp\\reportsample.xml')
+    return render_template('upload.html')
 
 
 

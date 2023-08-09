@@ -1,13 +1,16 @@
-from db import sqlliteconnect as db
+
+from db import sqlliteconnect as mydb
 import pandas as pd
 
 #First team based results to show on screen
 def basequery(team):
-    dbconn = db.SQLConnect()
-    connection = dbconn.sqlite_open_connection(db.SQLConnect.stagedb)
+    dbconn = mydb.SQLiteConnect()
+    connection = dbconn.sqlite_open_connection(mydb.SQLiteConnect.stagedb)
     df = pd.read_sql_query(f'''
                            SELECT DISTINCT test_run_name FROM {team} order by end_time desc;''', connection)
     connection.close()
     return df
 
 #Second query to run for team screen
+
+#basequery('testing')
