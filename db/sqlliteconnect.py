@@ -96,13 +96,13 @@ def insert_data_to_team_table(table):
     q = '''INSERT INTO '''+ table + ''' VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
     return q
 
-
+def create_team_table(table):
 #Example on how to add a new table. DO NOT RUN EVERYTIME
-#mycon = SQLiteConnect()
-#thecon = mycon.sqlite_open_connection(mycon.stagedb)
-#mytable = create_new_team_table('testing')
-#mycon.sqlite_sql_execute(thecon, mytable)
-#mycon.sqlite_connection_close(thecon)
+    mycon = SQLiteConnect()
+    thecon = mycon.sqlite_open_connection(mycon.stagedb)
+    mytable = create_new_team_table('testing')
+    mycon.sqlite_sql_execute(thecon, mytable)
+    mycon.sqlite_connection_close(thecon)
 
 #mydb = SQLiteConnect()
 #thecon = mydb.sqlite_open_connection('stagedb.db')
