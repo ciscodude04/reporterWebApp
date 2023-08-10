@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from os import environ
 from db import queries as que
 from neoloadreporter import xmlreporter as x
+import neoloadreporter as rep
 from werkzeug.utils import secure_filename
+from db import sqlliteconnect as team
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'xml'}
@@ -12,7 +14,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def hello_world():
-     return render_template('main.html')
+    #team.create_team_table('testing')
+    #x.neoload_xml_reader('testing','reportsample.xml')
+    return render_template('main.html')
 
 @app.route('/teamportal/<team>', methods =['GET', 'POST'])
 def teampage(team):
@@ -46,7 +50,6 @@ def uploadfile():
 def allowed_files(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 
 if __name__ == '__main__':
