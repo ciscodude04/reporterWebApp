@@ -12,7 +12,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def hello_world():
-     return "<p> Hello, World</p>"
+     return render_template('main.html')
 
 @app.route('/teamportal/<team>', methods =['GET', 'POST'])
 def teampage(team):
