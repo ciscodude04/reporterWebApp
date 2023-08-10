@@ -3,7 +3,7 @@ html, body {
 }
 
 .headers {
-    background-color: #5ca0f2;
+    background-color: #84abdb;
     text-align: center;
 }
 
@@ -23,4 +23,24 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#db_data {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#db_data td, #db_data th {
+    text-align: center;
+    border: 1px solid #c2c4c3;
+    padding: 0.5rem;
+}
+
+#db_data tr:nth-child(even) {
+    background-color: #84abdb;
+}
+
+#db_data th {
+    background-color: #5ab085;
+    color: white;
 }
