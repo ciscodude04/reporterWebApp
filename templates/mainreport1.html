@@ -33,7 +33,7 @@
                         <th>Status</th>
                         <th>Start Time</th>
                         <th>Duration</th>
-                        <th>Description</th>
+                        <th>Average</th>
                     </tr>
                     <tr>
                         <td>0</td>
@@ -48,14 +48,13 @@
                 <p>------------------SEPARATOR---------------------------------</p>
                 <div>
                     {%block content %}
-                    <table>
+                    <table id="db_data">
                         <tr>
-                            <td>Test Name</td>
-                            <td>Status</td>
-                            <td>Start Time</td>
-                            <td>End Time</td>
-                            <td>Duration</td>
-                            <td>Description</td>
+                            <th>Test Name</th>
+                            <th>Status</th>
+                            <th>Start Time</th>
+                            <th>Duration</th>
+                            <th>Average</th>
                         </tr>
                         <tbody>
                             <tr>
@@ -65,7 +64,7 @@
                                 <td>{{value[2]}}</td>
                                 <td>{{value[3]}}</td>
                                 <td>{{value[4]}}</td>
-                                <td>{{value[5]}}</td>
+                                <!-- <td>{{value[5]}}</td> -->
                             </tr>
                             {% endfor %}
                         </tbody>
