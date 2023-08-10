@@ -1,0 +1,56 @@
+{% block head %}
+
+<title>Upload XML FIles</title>
+<script src="{{url_for('static', filename='js/Pages/uploadPage.js')}}"></script>
+
+{% endblock %}
+
+{% block body %}
+<h1>Upload Neoload Results</h1>
+<br />
+
+<div class="content">
+   
+    <div>
+        <h4>Report</h4>
+        <!-- <input type="radio" id="xmlreport" value="xmlreport" name="uploadtype" onclick="displayaction()" />
+        <label for="xmlreport">Upload XML Report</label><br /> -->
+        <div id="xmlselection">
+            <h4>XML Report</h4>
+            <form method="post">
+
+                <div>
+                    <h4>Team</h4>
+                    <select id="team_selection" name="team" >
+                        <option value="">Select a team from the dropdown</option>
+                        <option value="Future of Payroll">FOP</option>
+        
+                    </select>
+                    <br />
+        
+                    <h4>Choose Pre Prod Environment</h4>
+                    <div>
+                        <input type="radio" id="dev" value="dev" name="env" />
+                        <label for=""dev>DEV</label>
+                        <input type="radio" id="test" value="test" name="env" />
+                        <label for=""dev>Test</label>
+                        <input type="radio" id="stage" value="stage" name="env" />
+                        <label for=""dev>Stage</label>
+                        <input type="radio" id="local" value="local" name="env" />
+                        <label for=""dev>Local</label>
+                    </div>
+                    <br />
+
+
+
+                <input type="file" name="uploadtype">
+                <input type="submit" value="Upload">
+            </form>
+
+
+            <!-- <input type="file" id="xmlfield" name="nm" placeholder="Enter XML file location" />
+            <span id="errorMessage2"></span> -->
+        </div>
+
+</div>
+{% endblock %}
