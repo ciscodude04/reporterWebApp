@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     #que.basequery('testing')
-    x.neoload_xml_reader('testing','C:\\Users\\Cisco\\Documents\\Python Projects\\webappdashboard\\reporterWebApp\\reportsample.xml')
+    #x.neoload_xml_reader('testing','C:\\Users\\Cisco\\Documents\\Python Projects\\webappdashboard\\reporterWebApp\\reportsample.xml')
     return "<p> Hello, World</p>"
 
 @app.route('/teamportal/<team>', methods =['GET', 'POST'])
@@ -19,7 +19,9 @@ def teampage(team):
 
 @app.route('/template1', methods=['GET'])
 def sample1():
-    return render_template('mainreport1.html')
+    mydata = que.basequery('testing')
+    print(mydata)
+    return render_template('mainreport1.html', thedata=mydata)
 
 @app.route('/upload', methods=['GET','POST'])
 def uploadfile():

@@ -4,7 +4,7 @@
         <link rel="stylesheet" type="text/css" href="../static/content/styles.css" />
     </head>
     <body>
-        <h1>Performance Trend Reoprt</h1>
+        <h1>Performance Trend Report</h1>
 
         <div class="headers">
             <h3>Transaction Trends</h3>
@@ -43,6 +43,35 @@
                         <td>2 minutes, 0 seconds</td>
                         <td>Started by Francisco user admin on 3.83.20.50</td>
                     </tr>
+                </div>
+
+                <p>------------------SEPARATOR---------------------------------</p>
+                <div>
+                    {%block content %}
+                    <table>
+                        <tr>
+                            <td>Test Name</td>
+                            <td>Status</td>
+                            <td>Start Time</td>
+                            <td>End Time</td>
+                            <td>Duration</td>
+                            <td>Description</td>
+                        </tr>
+                        <tbody>
+                            <tr>
+                                {% for key,value in thedata.iterrows() %}
+                                <td>{{value[0]}}</td>
+                                <td>{{value[1]}}</td>
+                                <td>{{value[2]}}</td>
+                                <td>{{value[3]}}</td>
+                                <td>{{value[4]}}</td>
+                                <td>{{value[5]}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                    {% endblock %}
                 </tbody>
             </table>
         </div>
