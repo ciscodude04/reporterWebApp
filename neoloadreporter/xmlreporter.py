@@ -51,5 +51,3 @@ def neoload_xml_reader(table_name, xml_file_location):
     connection = database.sqlite_open_connection(myconstring)
     database.sqlite_executemany(connection,db.insert_data_to_team_table(table_name),mydata)
     connection.close(connection)
-
-#reader = neoload_xml_reader('testing','C:\\Users\\Cisco\\Documents\\Python Projects\\webappdashboard\\reporterWebApp\\reportsample.xml')
