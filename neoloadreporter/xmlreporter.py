@@ -34,10 +34,12 @@ class xmlReader:
                         sl3max = statlayer3.get('max')
                         sl3deviation = statlayer3.get('stddev')
                         sl3count = statlayer3.get('hits')
+                        sl390percentile = statlayer3.get('percentile1')
                         sl395percentile = statlayer3.get('percentile2')
-                        print(f'{sl3scenario}, {sl3step}, {sl3count}')
+                        sl399percentile = statlayer3.get('percentile3')
+                        #print(f'{sl3scenario}, {sl3step}, {sl3count}')
 
-                        data.append((project, testrun_name, sl3scenario, sl3step, sl3count,sl3min, sl3avg1,sl3max, sl395percentile, sl3deviation,status, term_reason, duration, start_time, end_time))
+                        data.append((project, testrun_name, sl3scenario, sl3step, sl3count,sl3min, sl3avg1,sl3max, sl390percentile, sl395percentile, sl399percentile, sl3deviation,status, term_reason, duration, start_time, end_time))
 
         return data
     
@@ -50,4 +52,5 @@ def neoload_xml_reader(table_name, xml_file_location):
     myconstring = db.SQLiteConnect.stagedb
     connection = database.sqlite_open_connection(myconstring)
     database.sqlite_executemany(connection,db.insert_data_to_team_table(table_name),mydata)
-    connection.close(connection)
+    database.sqlite_connection_close(connection)
+    #connection.close(connection)

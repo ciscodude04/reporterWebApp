@@ -3,7 +3,7 @@ from sqlite3 import Error
 
 class SQLiteConnect:
 
-    stagedb = 'testing.db'
+    stagedb = 'mydbtesting.db'
 
     def __init__(self):
         pass
@@ -63,8 +63,10 @@ def create_new_team_table(table_name):
     min TEXT,
     average TEXT,
     max TEXT,
+    percentile_90 TEXT,
     percentile_95 TEXT,
-    std_deviation,
+    percentile_99 TEXT,
+    std_deviation TEXT,
     status TEXT,
     term_reason TEXT,
     duration TEXT,
@@ -93,14 +95,14 @@ def drop_table(table_name):
     return q
 
 def insert_data_to_team_table(table):
-    q = '''INSERT INTO '''+ table + ''' VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
+    q = '''INSERT INTO '''+ table + ''' VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
     return q
 
 def create_team_table(table):
 #Example on how to add a new table. DO NOT RUN EVERYTIME
     mycon = SQLiteConnect()
     thecon = mycon.sqlite_open_connection(mycon.stagedb)
-    mytable = create_new_team_table('testing')
+    mytable = create_new_team_table(table)
     mycon.sqlite_sql_execute(thecon, mytable)
     mycon.sqlite_connection_close(thecon)
 

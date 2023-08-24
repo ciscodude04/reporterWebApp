@@ -14,8 +14,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def hello_world():
-    #team.create_team_table('testing')
-    #x.neoload_xml_reader('testing','reportsample.xml')
+    #team.create_team_table('fop')
+    #x.neoload_xml_reader('fop','C:\\Users\\fjdiaz\\OneDrive - Insperity Inc\\Documents\\Python\\dashboard\\reporterWebApp\\reportsample.xml')
     return render_template('main.html')
 
 @app.route('/teamportal/<team>', methods =['GET', 'POST'])
