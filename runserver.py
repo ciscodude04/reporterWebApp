@@ -1,25 +1,20 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from os import environ
+import os
 from db import queries as que
 from neoloadreporter import xmlreporter as x
 import neoloadreporter as rep
 from werkzeug.utils import secure_filename
 from db import sqlliteconnect as team
 
-UPLOAD_FOLDER = 'uploads'
-#ALLOWED_EXTENSIONS = {'.xml'}
-
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD EXTENSIONS'] = ['.xml']
-app.config['UPLOAD PATH'] = 'uploads'
+app.config['UPLOAD PATH'] = 'reporterWebApp\\uploads'
 
 @app.route("/")
 def hello_world():
-    #team.create_team_table('fop')
-    #x.neoload_xml_reader('fop','C:\\Users\\fjdiaz\\OneDrive - Insperity Inc\\Documents\\Python\\dashboard\\reporterWebApp\\reportsample.xml')
     return render_template('main.html')
 
 @app.route('/teamportal/<team>', methods =['GET', 'POST'])
@@ -35,15 +30,18 @@ def sample1():
 
 @app.route('/upload', methods=['GET','POST'])
 def upload_files():
-    uploaded_file = request.files['file']
-    filename = secure_filename(uploaded_file.filename)
-    if filename != '':
-        file_ext = environ.path.splitext(filename)[1]
-        if file_ext not in app.config['UPLOAD_EXTENSIONS'] or \
-                file_ext != validate_image(uploaded_file.stream):
-            abort(400)
-        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-    return redirect(url_for('upload.html'))
+    if request.method == 'POST':
+        uploaded_file = request.files['upload_file']
+        table_name = request.form['team_name']
+        filename = secure_filename(uploaded_file.filename)
+        if filename != '':
+            file_location = os.path.join(app.config['UPLOAD PATH'], filename)
+            print(file_location)
+            uploaded_file.save(os.path.join(app.config['UPLOAD PATH'], filename))
+            x.neoload_xml_reader(table_name,file_location)
+            return '<h1>File has been uploaded</h1>'
+    else:
+        return render_template('upload.html')
 
 
 
@@ -72,10 +70,6 @@ def uploadsecondfile():
         
         pass
     return render_template('uploadbackup.html')
-
-def allowed_files(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 if __name__ == '__main__':
