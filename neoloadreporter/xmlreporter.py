@@ -51,6 +51,7 @@ def neoload_xml_reader(table_name, xml_file_location):
     database = db.SQLiteConnect()
     myconstring = db.SQLiteConnect.stagedb
     connection = database.sqlite_open_connection(myconstring)
+    database.sqlite_sql_execute(connection, db.create_new_team_table(table_name))
     database.sqlite_executemany(connection,db.insert_data_to_team_table(table_name),mydata)
     database.sqlite_connection_close(connection)
     #connection.close(connection)

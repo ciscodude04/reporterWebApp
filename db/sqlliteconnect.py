@@ -3,7 +3,7 @@ from sqlite3 import Error
 
 class SQLiteConnect:
 
-    stagedb = 'mydbtesting.db'
+    stagedb = 'stage.db'
 
     def __init__(self):
         pass
@@ -75,7 +75,7 @@ def create_new_team_table(table_name):
     created_at DATETIME NOT NULL
         DEFAULT CURRENT_TIMESTAMP
     );'''
-
+    print('Table created')
     return q
 
 def create_premier_accounts_table():
