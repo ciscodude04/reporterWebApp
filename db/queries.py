@@ -7,7 +7,7 @@ def basequery(team):
     dbconn = mydb.SQLiteConnect()
     connection = dbconn.sqlite_open_connection(mydb.SQLiteConnect.stagedb)
     df = pd.read_sql_query(f'''
-                           select DISTINCT test_run_name, count,min, average,max, count, percentile_95, std_deviation FROM {team} order by end_time desc LIMIT 10;''', connection)
+                           select test_run_name, count,min, average,max, count, percentile_95, std_deviation FROM {team} order by end_time desc LIMIT 10;''', connection)
     dbconn.sqlite_connection_close(connection)
     return df
 

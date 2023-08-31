@@ -43,7 +43,7 @@ class SQLiteConnect:
     def sqlite_sql_execute(self, con, q):
         cur = con.cursor()
         cur.execute(q)
-        print('Executing sql statement ' + q)
+        #print('Executing sql statement ' + q)
         con.commit()
         print('Execution commited.')
 
@@ -60,10 +60,11 @@ def create_new_team_table(table_name):
     scenario TEXT,
     step TEXT,
     count TEXT,
+    error_count TEXT,
     min TEXT,
     average TEXT,
     max TEXT,
-    percentile_90 TEXT,
+    percentile_50 TEXT,
     percentile_95 TEXT,
     percentile_99 TEXT,
     std_deviation TEXT,
@@ -95,7 +96,7 @@ def drop_table(table_name):
     return q
 
 def insert_data_to_team_table(table):
-    q = '''INSERT INTO '''+ table + ''' VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
+    q = '''INSERT INTO '''+ table + ''' VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
     return q
 
 def create_team_table(table):

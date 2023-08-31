@@ -7,7 +7,6 @@ import neoloadreporter as rep
 from werkzeug.utils import secure_filename
 from db import sqlliteconnect as team
 
-
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
 app.config['UPLOAD EXTENSIONS'] = ['.xml']
@@ -24,7 +23,7 @@ def teampage(team):
 
 @app.route('/template1', methods=['GET'])
 def sample1():
-    mydata = que.basequery('fop')
+    mydata = que.basequery('mydbtest')
     print(mydata)
     return render_template('mainreport1.html', thedata=mydata)
 
@@ -33,28 +32,17 @@ def upload_files():
     if request.method == 'POST':
         uploaded_file = request.files['upload_file']
         table_name = request.form['team_name']
+        env = request.form['env']
         filename = secure_filename(uploaded_file.filename)
         if filename != '':
             file_location = os.path.join(app.config['UPLOAD PATH'], filename)
-            print(file_location)
+            #print(file_location)
             uploaded_file.save(os.path.join(app.config['UPLOAD PATH'], filename))
             x.neoload_xml_reader(table_name,file_location)
             return '<h1>File has been uploaded</h1>'
     else:
         return render_template('upload.html')
 
-
-
-
-
-    # print('made it')
-    # if request.method == 'POST':
-    #     uploaded_file = request.files['files']
-    #     if file.filename != '':
-    #         uploaded_file.save(environ.PATH.join(app.config['UPLOAD PATH'], file.filename))
-    #         return "<h1> Data has been uploaded</h1>"
-    # else:
-    #     return render_template('upload.html')
 
 @app.route('/upload2', methods=['GET','POST'])
 def uploadsecondfile():

@@ -7,7 +7,22 @@
     <h1>File Upload</h1>
     <form method="post" action="" enctype="multipart/form-data">
       <p><input type="file" name="upload_file"></p>
+      <label for="team_name">Enter team name</label>
       <p><input type="text" name="team_name"></p>
+
+      <h4>Choose Pre Prod Environment</h4>
+                    <div>
+                        <input type="radio" id="dev" value="dev" name="env" />
+                        <label for=""dev>DEV</label>
+                        <input type="radio" id="test" value="test" name="env" />
+                        <label for=""dev>Test</label>
+                        <input type="radio" id="stage" value="stage" name="env" />
+                        <label for=""dev>Stage</label>
+                        <input type="radio" id="local" value="local" name="env" />
+                        <label for=""dev>Local</label>
+                    </div>
+
+
       <p><input type="submit" value="Submit"></p>
     </form>
   </body>
