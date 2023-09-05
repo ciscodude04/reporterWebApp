@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
-from db import sqlliteconnect as db
+#from db import sqlliteconnect as db
+from db import mysqlconnector as sql
+from helpers import file_reader_writer as r
 
 
 class xmlReader:
@@ -58,3 +60,23 @@ def neoload_xml_reader(table_name, xml_file_location):
     database.sqlite_sql_execute(connection, db.create_new_team_table(table_name))
     database.sqlite_executemany(connection,db.insert_data_to_team_table(table_name),mydata)
     database.sqlite_connection_close(connection)
+
+def neoload_sql_xml_reader(team_name, xml_file_location):
+    tree = ET.parse(xml_file_location)
+    root = tree.getroot()
+    test_data = xmlReader()
+    mydata = test_data.fetchscenarioDatafromXML(root)
+    #Save to database
+    #database = 'QATestPerformance'
+    #server = 'D1VDBSQLD313\Instance1'
+    #connection_string = f'Driver={{ODBC Driver 17 for SQL Server}};Server={server};Database={database};Trusted_Connection=yes;'
+    myfile = r.readerWriter('variables.txt')
+    myfile.open_file()
+    results = myfile.dictionary_reader()
+    connection_string = results.get('connection_string')
+    print('here is the string:', connection_string)
+    mysqlobj = sql.mysqlconnector(connection_string)
+    conn = mysqlobj.sql_open_connection(connection_string)
+    query = mysqlobj.sql_statement_insert_data(team_name)
+    mysqlobj.sql_execute_many_statements(conn, query, mydata)
+    mysqlobj.sql_close_connection(conn)

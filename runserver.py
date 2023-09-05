@@ -36,9 +36,8 @@ def upload_files():
         filename = secure_filename(uploaded_file.filename)
         if filename != '':
             file_location = os.path.join(app.config['UPLOAD PATH'], filename)
-            #print(file_location)
             uploaded_file.save(os.path.join(app.config['UPLOAD PATH'], filename))
-            x.neoload_xml_reader(table_name,file_location)
+            x.neoload_sql_xml_reader(table_name, file_location)
             return '<h1>File has been uploaded</h1>'
     else:
         return render_template('upload.html')
