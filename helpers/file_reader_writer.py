@@ -4,7 +4,8 @@ class readerWriter:
 
     def open_file(self):
         with open(self.location) as file:
-            print(file.read())
+            pass
+            #print(file.read())
         return file
     
     def dictionary_reader(self):
@@ -19,9 +20,8 @@ class readerWriter:
     def close_file(self, file):
         file.close()
 
-
-myfile = readerWriter('variables.txt')
-myfile.open_file()
-results = myfile.dictionary_reader()
-print(results)
-print(results.get('database'))
+    def get_connection_string(self):
+        myfile = readerWriter(self.location)
+        myfile.open_file()
+        results = myfile.dictionary_reader()
+        return results.get('connection_string')

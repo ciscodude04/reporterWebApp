@@ -31,7 +31,7 @@ def sample1():
 def upload_files():
     if request.method == 'POST':
         uploaded_file = request.files['upload_file']
-        table_name = request.form['team_name']
+        table_name = 'reports'
         env = request.form['env']
         filename = secure_filename(uploaded_file.filename)
         if filename != '':

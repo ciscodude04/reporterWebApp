@@ -66,15 +66,10 @@ def neoload_sql_xml_reader(team_name, xml_file_location):
     root = tree.getroot()
     test_data = xmlReader()
     mydata = test_data.fetchscenarioDatafromXML(root)
-    #Save to database
-    #database = 'QATestPerformance'
-    #server = 'D1VDBSQLD313\Instance1'
-    #connection_string = f'Driver={{ODBC Driver 17 for SQL Server}};Server={server};Database={database};Trusted_Connection=yes;'
     myfile = r.readerWriter('variables.txt')
     myfile.open_file()
     results = myfile.dictionary_reader()
     connection_string = results.get('connection_string')
-    print('here is the string:', connection_string)
     mysqlobj = sql.mysqlconnector(connection_string)
     conn = mysqlobj.sql_open_connection(connection_string)
     query = mysqlobj.sql_statement_insert_data(team_name)
