@@ -11,7 +11,7 @@ def basequery(team):
     dbconn = odbc.mysqlconnector(connection_string)
     conn = dbconn.sql_open_connection(connection_string)
     query1 = 'select * from reports'
-    query2 = 'select test_run_name, count,min, average, max, percentile_95, std_deviation FROM [QATestPerformance].[ADMINISTAFF\fjdiaz].[reports] order by end_time'
+    query2 = 'select test_run_name, count,min, average, max, percentile_95, std_deviation FROM [QATestPerformance].[ADMINISTAFF\\fjdiaz].[reports] order by end_time'
     df = pd.read_sql_query(query1, conn)
     dbconn.sql_close_connection(conn)
     return df
