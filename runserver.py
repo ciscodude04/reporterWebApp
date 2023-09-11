@@ -32,7 +32,6 @@ def upload_files():
     if request.method == 'POST':
         uploaded_file = request.files['upload_file']
         table_name = 'reports'
-        env = request.form['env']
         filename = secure_filename(uploaded_file.filename)
         if filename != '':
             file_location = os.path.join(app.config['UPLOAD PATH'], filename)
@@ -41,22 +40,6 @@ def upload_files():
             return '<h1>File has been uploaded</h1>'
     else:
         return render_template('upload.html')
-
-
-@app.route('/upload2', methods=['GET','POST'])
-def uploadsecondfile():
-    if request.method == 'POST':
-        team_selection = request.form['team']
-        environment = request.form['env']
-        report_string = request.form['uploadtype']
-        x.neoload_xml_reader(team_selection, report_string)
-        print(f'here is the data: /n {report_string}')
-        return "<h1>File has been upload</h1>"
-        pass
-    else:
-        
-        pass
-    return render_template('uploadbackup.html')
 
 
 if __name__ == '__main__':
