@@ -1,8 +1,6 @@
 import pypyodbc as odbc
 import pandas as pd
 
-
-
 class mysqlconnector():
 
     def __init__(self, _connection_string):
@@ -42,8 +40,8 @@ class mysqlconnector():
         except Exception as e:
             print(e)
 
-    def sql_statement_insert_data(self, team_name):
-        q = f'''INSERT INTO {team_name} VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
+    def sql_statement_insert_data(self, table_name):
+        q = f'''INSERT INTO [QATestPerformance].[ADMINISTAFF\\fjdiaz].[{table_name}] VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
         return q
 
 
@@ -51,25 +49,25 @@ class mysqlconnector():
         q=f'''
         use QATestPerformance
 
-CREATE TABLE {team_name}(
-    project VARCHAR,
-    test_run_name VARCHAR,
-    scenario VARCHAR,
-    step VARCHAR,
-    count VARCHAR,
-    error_count VARCHAR,
-    min VARCHAR,
-    average VARCHAR,
-    max VARCHAR,
-    percentile_50 VARCHAR,
-    percentile_95 VARCHAR,
-    percentile_99 VARCHAR,
-    std_deviation VARCHAR,
-    status VARCHAR,
-    term_reason VARCHAR,
-    duration VARCHAR,
-    start_time VARCHAR,
-    end_time VARCHAR,
+CREATE TABLE reports(
+    project VARCHAR(255),
+    test_run_name VARCHAR(255),
+    scenario VARCHAR(255),
+    step VARCHAR(255),
+    count NVARCHAR(255),
+    error_count NVARCHAR(255),
+    min DECIMAL(8,3),
+    average DECIMAL(8,3),
+    max DECIMAL(8,3),
+    percentile_50 DECIMAL(8,3),
+    percentile_95 DECIMAL(8,3),
+    percentile_99 DECIMAL(8,3),
+    std_deviation VARCHAR(255),
+    status VARCHAR(255),
+    term_reason VARCHAR(255),
+    duration VARCHAR(255),
+    start_time VARCHAR(255),
+    end_time VARCHAR(255),
     created_at DATETIME NOT NULL
         DEFAULT CURRENT_TIMESTAMP)
         '''
