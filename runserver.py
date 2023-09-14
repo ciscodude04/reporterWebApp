@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from os import environ
 import os
-from db import queries as que
+from db import queries as q
 from neoloadreporter import xmlreporter as x
 import neoloadreporter as rep
 from werkzeug.utils import secure_filename
@@ -16,14 +16,31 @@ app.config['UPLOAD PATH'] = 'reporterWebApp\\uploads'
 def hello_world():
     return render_template('main.html')
 
-@app.route('/teamportal/<team>', methods =['GET', 'POST'])
-def teampage(team):
-    data = que.basequery(team)
-    return render_template('teamportal.html', team_name=team, testrun=data)
+# This is to show initial test run results
+@app.route('/teamresults', methods =['GET', 'POST'])
+def teampage():
+    data = q.filter_test_run_name()
+    return render_template('teamresults.html', testrun=data)
 
+#Fetch Scenarios
+@app.route('/getscenarios', methods = ['GET', 'POST'])
+def update():
+    _testruns = request.args.get('test_runs')
+    data = q.filter_scenarios(_testruns)
+    return render_template('scenariosupdate.html', scenario=data)
+
+#Fetch the scenario data
+@app.route('/scenariodata', methods =['GET', 'POST'])
+def update_scenario():
+    _testruns = request.args.get('test_runs')
+    _scenario = request.args.get('scenario')
+    data = q.filter_scenario_data(_testruns, _scenario)
+    return render_template('scenariodatapage.html', scenedata=data)
+
+#Sample Report
 @app.route('/template1', methods=['GET'])
 def sample1():
-    mydata = que.basequery('mydbtest')
+    mydata = q.filter_test_run_name()
     print(mydata)
     return render_template('mainreport1.html', thedata=mydata)
 

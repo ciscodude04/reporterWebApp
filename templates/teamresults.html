@@ -1,0 +1,107 @@
+{% block head %}
+<title id="team">{{team_name}}</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/stylesheet.css') }}" media="screen" /> -->
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Test Runs</h1>
+
+<div>
+    <select name="test_runs" id="test_run">
+        {% for key,value in testrun.iterrows() %}
+        <option value="{{value[0]}}">{{value[0]}}</option>
+        {% endfor %}
+    </select>
+    <button class="updateButton" onclick="showUpdateButton2()">Search Test Runs</button>
+</div>
+<!-- <button class="clearButton" onclick="">Clear filter</button> -->
+<br />
+<br />
+<div>
+<!-- SCENARIOS -->
+<div id="data">
+</div>
+<button id="updatebutton2" class="updateButton2" onclick="showreportbutton()" style="display:none">Search Scenarios</button>
+</div>
+<br />
+<div>
+<button id="generatereportbutton" class="generateReportbutton" style="display:none">Generate Report</button>
+</div>
+
+<div id="scenariodata">
+</div>
+
+<br />
+<!-- TABLE DATA -->
+<div id="trdata">
+
+</div>
+
+ 
+<script>
+    $(document).ready(function () {
+        $('.updateButton').on('click', function () {
+
+             var test_run = $('#test_run').val();
+            var team = $('#team').text();
+
+            req = $.ajax({
+                type: 'get',
+                url: '/getscenarios',
+                data: { test_runs: test_run },
+                success: function (response) {
+                    $('#data').fadeOut(1).fadeIn(1500);
+                    $('#data').html(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                },
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.updateButton2').on('click', function () {
+
+            var scenarioElement = $('#allscenarios').val();
+            var test_run = $('#test_run').val();
+            
+
+            req = $.ajax({
+                type: 'get',
+                url: '/scenariodata',
+                data: { test_runs: test_run, scenario: scenarioElement },
+                success: function (response) {
+                    $('#scenariodata').fadeOut(1).fadeIn(1500);
+                    //console.log(response);
+                    $('#scenariodata').html(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                },
+            });
+        });
+    });
+</script>
+
+<script>
+    function showUpdateButton2() {
+        var y = document.getElementById('updatebutton2');
+        y.style.display = "inline";
+        $('#updatebutton2').fadeOut(100).fadeIn(2000);
+    }
+    
+</script>
+<script>
+    function showreportbutton(){
+        var z = document.getElementById('generatereportbutton');
+        z.style.display = "inline";
+        $('#generatereportbutton').fadeout(100).fadeIn(2000)
+    }
+</script>
+{% endblock %}
+

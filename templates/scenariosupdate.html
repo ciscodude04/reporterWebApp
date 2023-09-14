@@ -1,0 +1,8 @@
+<div>
+    <h1>Scenarios</h1>
+    <select id="allscenarios">
+        {% for key,value in scenario.iterrows() %}
+        <option value="{{value[0]}}" onselect="loadresults()">{{value[0]}}</option>
+        {% endfor %}
+    </select>
+</div>
