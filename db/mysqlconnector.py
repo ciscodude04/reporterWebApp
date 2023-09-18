@@ -41,15 +41,16 @@ class mysqlconnector():
             print(e)
 
     def sql_statement_insert_data(self, table_name):
-        q = f'''INSERT INTO [QATestPerformance].[ADMINISTAFF\\fjdiaz].[{table_name}] VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
+        # table = f'{env}_{table_name}'
+        q = f'''INSERT INTO [QATestPerformance].[ADMINISTAFF\\fjdiaz].[{table_name}] VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)'''
         return q
 
 
     def sql_statement_create_new_team_table(self, team_name):
         q=f'''
-        use QATestPerformance
+        USE QATestPerformance
 
-CREATE TABLE reports(
+CREATE TABLE testing_reports(
     project VARCHAR(255),
     test_run_name VARCHAR(255),
     scenario VARCHAR(255),
@@ -60,6 +61,7 @@ CREATE TABLE reports(
     average DECIMAL(8,3),
     max DECIMAL(8,3),
     percentile_50 DECIMAL(8,3),
+	percentile_90 DECIMAL(8,3),
     percentile_95 DECIMAL(8,3),
     percentile_99 DECIMAL(8,3),
     std_deviation VARCHAR(255),

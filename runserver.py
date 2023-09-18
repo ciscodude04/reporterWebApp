@@ -19,6 +19,8 @@ def hello_world():
 # This is to show initial test run results
 @app.route('/teamresults', methods =['GET', 'POST'])
 def teampage():
+    #_env = request.form['env']
+    #_env = 'testing'
     data = q.filter_test_run_name()
     return render_template('teamresults.html', testrun=data)
 
@@ -48,12 +50,13 @@ def sample1():
 def upload_files():
     if request.method == 'POST':
         uploaded_file = request.files['upload_file']
-        table_name = 'reports'
+        _env = request.form['env']
+        table = f'{_env}_reports'
         filename = secure_filename(uploaded_file.filename)
         if filename != '':
             file_location = os.path.join(app.config['UPLOAD PATH'], filename)
             uploaded_file.save(os.path.join(app.config['UPLOAD PATH'], filename))
-            x.neoload_sql_xml_reader(table_name, file_location)
+            x.neoload_sql_xml_reader(table, file_location)
             return '<h1>File has been uploaded</h1>'
     else:
         return render_template('upload.html')
