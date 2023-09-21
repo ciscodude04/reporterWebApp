@@ -1,0 +1,12 @@
+
+<div>
+    <h4>Test Runs</h4>
+    <select name="test_runs" id="test_run">
+        {% for key,value in testrun.iterrows() %}
+        <option value="{{value[0]}}">{{value[0]}}</option>
+        {% endfor %}
+    </select>
+    <!-- <button class="testrunButton" onclick="showUpdateButton2()">Search Test Runs</button> -->
+</div>
+ <!-- <button class="clearButton" onclick="">Clear filter</button> -->
+<div>

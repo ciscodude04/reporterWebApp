@@ -19,25 +19,33 @@ def hello_world():
 # This is to show initial test run results
 @app.route('/teamresults', methods =['GET', 'POST'])
 def teampage():
-    #_env = request.form['env']
-    #_env = 'testing'
-    data = q.filter_test_run_name()
-    return render_template('teamresults.html', testrun=data)
+        return render_template('teamresults.html')
+
+@app.route('/testruns', methods = ['GET', 'POST'])
+def testruns():
+    if request.method == 'POST':
+        _env = request.form['env']
+        data = q.filter_test_run_name(_env)
+        return render_template('testruns.html', testrun=data)
 
 #Fetch Scenarios
 @app.route('/getscenarios', methods = ['GET', 'POST'])
 def update():
-    _testruns = request.args.get('test_runs')
-    data = q.filter_scenarios(_testruns)
-    return render_template('scenariosupdate.html', scenario=data)
+    if request.method == 'POST':
+        _env = request.form['env']
+        _testruns = request.form['test_runs']
+        data = q.filter_scenarios(_env, _testruns)
+        return render_template('scenariosupdate.html', scenario=data)
 
 #Fetch the scenario data
 @app.route('/scenariodata', methods =['GET', 'POST'])
 def update_scenario():
-    _testruns = request.args.get('test_runs')
-    _scenario = request.args.get('scenario')
-    data = q.filter_scenario_data(_testruns, _scenario)
-    return render_template('scenariodatapage.html', scenedata=data)
+    if request.method == 'POST':
+        _env = request.form['env']
+        _testruns = request.form['test_runs']
+        _scenario = request.form['scenario']
+        data = q.filter_scenario_data(_env, _testruns, _scenario)
+        return render_template('scenariodatapage.html', scenedata=data)
 
 #Sample Report
 @app.route('/template1', methods=['GET'])
