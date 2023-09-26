@@ -19,6 +19,13 @@ def hello_world():
 # This is to show initial test run results
 @app.route('/teamresults', methods =['GET', 'POST'])
 def teampage():
+    # if request.method == 'POST':
+    #     _env = request.form['env']
+    #     _testruns = request.form['test_runs']
+    #     _scenario = request.form['scenario']
+    #     data = q.filter_scenario_data(_env, _testruns, _scenario)
+    #     return redirect(url_for('singlereport'))
+    # else:
         return render_template('teamresults.html')
 
 @app.route('/testruns', methods = ['GET', 'POST'])
@@ -44,15 +51,9 @@ def update_scenario():
         _env = request.form['env']
         _testruns = request.form['test_runs']
         _scenario = request.form['scenario']
+        
         data = q.filter_scenario_data(_env, _testruns, _scenario)
         return render_template('scenariodatapage.html', scenedata=data)
-
-#Sample Report
-@app.route('/template1', methods=['GET'])
-def sample1():
-    mydata = q.filter_test_run_name()
-    print(mydata)
-    return render_template('mainreport1.html', thedata=mydata)
 
 @app.route('/upload', methods=['GET','POST'])
 def upload_files():
@@ -68,6 +69,10 @@ def upload_files():
             return '<h1>File has been uploaded</h1>'
     else:
         return render_template('upload.html')
+
+
+# Add to generate and incorporate report by calling service
+# ex. http://wdvapneolgp04.corporate.administaff.com:7400/Results/v1/Service.svc/
 
 
 if __name__ == '__main__':

@@ -36,9 +36,7 @@
 <button id="scenarioButton" class="updateButton2" onclick="showreportbutton()" style="display:none">Search Scenarios</button>
 </div>
 <br />
-<div>
-    <!-- <button id="generatereportbutton" class="generateReportbutton" style="display:none">Generate Report</button> -->
-</div>
+
 <!-- SCENARIO DATA -->
 <div id="scenariodata">
 </div>
@@ -114,11 +112,12 @@
         });
     });
 </script>
+
 <script>
     function showtestrunButton() {
         var y = document.getElementById('testrunBUTTON');
         // y.style.display = "inline";
-        $('#testrunBUTTON').fadeOut(1).fadeIn(1500);
+        $('#testrunBUTTON').fadeOut(100).fadeIn(1500);
     }
 </script>
 
@@ -131,9 +130,9 @@
 </script>
 <!-- <script>
     function showreportbutton(){
-        var z = document.getElementById('generatereportbutton');
+        var z = document.getElementById('generatereportlink');
         z.style.display = "inline";
-        $('#generatereportbutton').fadeOut(100).fadeIn(2000)
+        $('#generatereportlink').fadeOut(100).fadeIn(2000)
     }
 </script> -->
 {% endblock %}
