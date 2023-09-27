@@ -19,14 +19,18 @@ def hello_world():
 # This is to show initial test run results
 @app.route('/teamresults', methods =['GET', 'POST'])
 def teampage():
-    # if request.method == 'POST':
-    #     _env = request.form['env']
-    #     _testruns = request.form['test_runs']
-    #     _scenario = request.form['scenario']
-    #     data = q.filter_scenario_data(_env, _testruns, _scenario)
-    #     return redirect(url_for('singlereport'))
-    # else:
         return render_template('teamresults.html')
+
+@app.route('/singlereport', methods=[ 'POST'])
+def singlereport():
+    if request.method == 'POST':
+        _env = request.form['myenv']
+        _testruns = request.form['mytestrun']
+        _scenario = request.form['myscenarios']  
+        data = q.filter_scenario_data(_env, _testruns, _scenario)
+        return render_template('mainreport1.html', data=data)
+    else:
+        return '<h1>Whoops, nothing to see here, go back now!!</h1>'
 
 @app.route('/testruns', methods = ['GET', 'POST'])
 def testruns():
@@ -71,8 +75,8 @@ def upload_files():
         return render_template('upload.html')
 
 
-# Add to generate and incorporate report by calling service
-# ex. http://wdvapneolgp04.corporate.administaff.com:7400/Results/v1/Service.svc/
+# Add to generate and incorporate report by calling service see old project
+
 
 
 if __name__ == '__main__':

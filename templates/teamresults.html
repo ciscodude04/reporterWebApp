@@ -42,6 +42,29 @@
 </div>
 
 <br />
+<div>
+    <form id="form"  action="/singlereport" method="post">
+    <input id="myenvid" type="hidden" value="" name="myenv">
+    <input id="mytestrunid" type="hidden" value="" name="mytestrun">
+    <input id="myscenarioid" type="hidden" value="" name="myscenarios">
+    <input id="reportbutton" style="display: none" type="submit" value="Generate Report"/>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#reportbutton').on('click', function (){
+            var env = $('#environments').val();
+            var test_run = $('#test_run').val();
+            var scenarioElement = $('#allscenarios').val();
+            var url = '/singlereport'
+
+            document.getElementById("myenvid").value = env;
+            document.getElementById("mytestrunid").value = test_run;
+            document.getElementById("myscenarioid").value = scenarioElement;
+        });
+    });
+</script>
 
 <!-- GET TEST RUns -->
 <script>
@@ -128,11 +151,11 @@
         $('#scenarioButton').fadeOut(1).fadeIn(1500);
     }
 </script>
-<!-- <script>
+<script>
     function showreportbutton(){
-        var z = document.getElementById('generatereportlink');
+        var z = document.getElementById('reportbutton');
         z.style.display = "inline";
-        $('#generatereportlink').fadeOut(100).fadeIn(2000)
+        $('#reportbutton').fadeOut(100).fadeIn(2000)
     }
-</script> -->
+</script>
 {% endblock %}
